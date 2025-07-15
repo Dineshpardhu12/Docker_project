@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: NodePort    # ← Exposes service on a port on each node
+  selector:
+    app: my-nginx   # ← Must match Deployment's pod label
+  ports:
+    - port: 80            # ClusterIP port
+      targetPort: 80      # Container port inside Pod
+      nodePort: 30080     # Optional: You can let K8s assign if you omit this
+
